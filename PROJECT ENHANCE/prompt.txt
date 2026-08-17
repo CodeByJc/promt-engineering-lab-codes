@@ -1,0 +1,805 @@
+# React Migration & Frontend Completion Prompt
+
+You are a **Senior Frontend Engineer with 10+ years of professional experience** specializing in React.js, modern frontend architecture, UI engineering, JavaScript, responsive design, accessibility, and converting legacy HTML/CSS/JavaScript websites into clean, maintainable React applications.
+
+Your task is to **fully migrate and complete the existing DigitalCommHub website into React.js**.
+
+## Existing Website
+
+First inspect and understand the complete existing website:
+
+**Live website:**
+https://codebyjc.github.io/ICE3.github.io/
+
+The current website is primarily built using:
+
+* HTML
+* CSS
+* Vanilla JavaScript
+
+The website is an educational platform called **DigitalCommHub**, focused on Digital Communication concepts.
+
+The current website contains sections/features including:
+
+* Home
+* Features
+* About
+* Line Coding
+* Calculators
+* Direct Sequence Spread Spectrum (DSSS)
+* Digital Modulation
+* Interactive/educational content
+* Calculator functionality
+* Converter functionality
+* JavaScript-based calculations and interactions
+
+## PRIMARY OBJECTIVE
+
+Convert the entire existing frontend from:
+
+**HTML + CSS + Vanilla JavaScript**
+
+into:
+
+**React.js + CSS + JavaScript**
+
+while preserving the existing website's **visual identity, content, functionality, calculations, and behavior**.
+
+This is a **migration and modernization project**, NOT a request to invent an entirely different website.
+
+---
+
+# 1. FIRST — AUDIT THE EXISTING PROJECT
+
+Before writing React code:
+
+1. Inspect every existing HTML file.
+2. Inspect every CSS file.
+3. Inspect every JavaScript file.
+4. Identify every page, section, component, button, input, form, calculator, converter, animation, navigation item, and interactive element.
+5. Identify how the current JavaScript logic works.
+6. Identify dependencies between HTML elements and JavaScript.
+7. Identify all calculations and formulas.
+8. Identify all user inputs and outputs.
+9. Identify all images/assets/icons/fonts.
+10. Identify all navigation links.
+11. Identify responsive behavior already implemented.
+12. Do NOT remove functionality simply because it is implemented in vanilla JavaScript.
+
+Create a mental/component map of the existing website before implementing the migration.
+
+---
+
+# 2. IMPORTANT — PRESERVE EXISTING JAVASCRIPT LOGIC
+
+This is extremely important.
+
+The existing website already contains JavaScript logic for things such as:
+
+* calculators
+* converters
+* digital communication calculations
+* input processing
+* output generation
+* interactive functionality
+
+**Do NOT rewrite the mathematical/business logic unnecessarily.**
+
+The existing JavaScript logic should be preserved and adapted into React-compatible functions.
+
+For example, if the existing code has:
+
+```javascript
+function calculateSomething(input) {
+    // existing calculation
+}
+```
+
+convert it conceptually into:
+
+```javascript
+const calculateSomething = (input) => {
+    // preserve the same calculation logic
+};
+```
+
+Then connect it to React state:
+
+```javascript
+const [input, setInput] = useState("");
+const [result, setResult] = useState(null);
+```
+
+The goal is:
+
+**Same calculation → React state → React UI**
+
+NOT:
+
+**New calculation → different result**
+
+The existing mathematical behavior must remain functionally equivalent.
+
+---
+
+# 3. REACT ARCHITECTURE
+
+Use a clean, scalable React architecture.
+
+Recommended structure:
+
+```text
+src/
+│
+├── assets/
+│   ├── images/
+│   ├── icons/
+│   └── fonts/
+│
+├── components/
+│   ├── Navbar.jsx
+│   ├── Footer.jsx
+│   ├── Hero.jsx
+│   ├── SectionTitle.jsx
+│   ├── FeatureCard.jsx
+│   ├── CalculatorCard.jsx
+│   ├── InputField.jsx
+│   ├── ResultCard.jsx
+│   └── ...
+│
+├── pages/
+│   ├── Home.jsx
+│   ├── LineCoding.jsx
+│   ├── Calculators.jsx
+│   ├── Converter.jsx
+│   ├── DSSS.jsx
+│   ├── DigitalModulation.jsx
+│   └── About.jsx
+│
+├── logic/
+│   ├── calculators/
+│   ├── converters/
+│   ├── modulation/
+│   ├── lineCoding/
+│   └── dsss/
+│
+├── hooks/
+│
+├── utils/
+│
+├── styles/
+│   ├── global.css
+│   ├── variables.css
+│   └── responsive.css
+│
+├── App.jsx
+└── main.jsx
+```
+
+Adjust this structure according to the actual existing project after inspection.
+
+Do NOT blindly create unnecessary files.
+
+---
+
+# 4. COMPONENTIZATION
+
+Break the website into meaningful reusable React components.
+
+For example:
+
+```text
+App
+ ├── Navbar
+ ├── Home
+ │    ├── Hero
+ │    ├── Features
+ │    │    ├── FeatureCard
+ │    │    ├── FeatureCard
+ │    │    └── FeatureCard
+ │    └── AboutPreview
+ │
+ ├── LineCoding
+ ├── Calculators
+ │    ├── DataRateCalculator
+ │    ├── CapacityCalculator
+ │    └── ...
+ │
+ ├── Converter
+ ├── DSSS
+ ├── DigitalModulation
+ │    ├── ASK
+ │    ├── FSK
+ │    └── PSK
+ │
+ └── Footer
+```
+
+Use reusable components wherever the same UI pattern appears.
+
+Avoid creating one giant `App.jsx`.
+
+---
+
+# 5. ROUTING
+
+If the existing website contains multiple HTML pages, convert them into React routes.
+
+Use:
+
+```text
+/
+```
+
+for Home.
+
+Then appropriate routes such as:
+
+```text
+/line-coding
+/calculators
+/converter
+/dsss
+/digital-modulation
+/about
+```
+
+Use React Router if routing is required.
+
+Navigation should work without full-page reloads.
+
+Do not leave old `.html` navigation links.
+
+For example, replace:
+
+```html
+<a href="calculator.html">
+```
+
+with React navigation.
+
+---
+
+# 6. UI — PRESERVE THE EXISTING DESIGN
+
+The current website already has an established design.
+
+Therefore:
+
+### DO
+
+* Preserve the existing visual identity.
+* Preserve colors.
+* Preserve typography.
+* Preserve spacing.
+* Preserve section hierarchy.
+* Preserve card layouts.
+* Preserve buttons.
+* Preserve navigation style.
+* Preserve existing animations.
+* Preserve content.
+* Preserve illustrations/assets.
+* Preserve the overall look and feel.
+
+### DO NOT
+
+* Completely redesign the website.
+* Replace it with a generic SaaS dashboard.
+* Introduce unnecessary gradients.
+* Introduce random glassmorphism.
+* Introduce excessive animations.
+* Replace existing colors without reason.
+* Remove educational content.
+* Remove existing features.
+* Change formulas.
+
+The React version should feel like the **same DigitalCommHub website, but professionally engineered**.
+
+---
+
+# 7. RESPONSIVE DESIGN
+
+Improve the existing responsive behavior where necessary.
+
+The website must work properly on:
+
+### Desktop
+
+```text
+1920px
+1440px
+1280px
+```
+
+### Laptop
+
+```text
+1024px
+```
+
+### Tablet
+
+```text
+768px
+```
+
+### Mobile
+
+```text
+480px
+375px
+320px
+```
+
+Ensure:
+
+* Navbar works on mobile.
+* Cards stack correctly.
+* Calculator inputs remain usable.
+* Tables don't overflow unnecessarily.
+* Buttons remain accessible.
+* Text remains readable.
+* Images scale correctly.
+* Sections maintain proper spacing.
+* No horizontal page overflow.
+
+---
+
+# 8. CALCULATORS
+
+This is one of the most important parts.
+
+Find every calculator currently implemented in the original JavaScript.
+
+For each calculator:
+
+1. Preserve the original formula.
+2. Preserve input types.
+3. Preserve validation.
+4. Preserve output.
+5. Preserve units.
+6. Preserve error handling.
+7. Preserve decimal/rounding behavior unless there is an obvious bug.
+8. Move state management into React.
+9. Keep calculation logic separate from presentation.
+
+Preferred pattern:
+
+```text
+UI Component
+      ↓
+React State
+      ↓
+Calculation Function
+      ↓
+Result
+      ↓
+React UI
+```
+
+Example:
+
+```javascript
+function calculateDataRate(input) {
+    // Existing calculation logic
+}
+```
+
+Then:
+
+```jsx
+const handleCalculate = () => {
+    const result = calculateDataRate(input);
+    setResult(result);
+};
+```
+
+Do not put complex mathematical logic directly inside JSX.
+
+---
+
+# 9. CONVERTER
+
+If the current website contains converters:
+
+* preserve all conversion logic
+* preserve units
+* preserve input/output behavior
+* preserve precision
+* add proper React state
+* validate invalid input
+* prevent crashes from empty/invalid values
+
+Do not change the underlying conversion formulas unless fixing an obvious implementation bug.
+
+---
+
+# 10. DIGITAL COMMUNICATION FEATURES
+
+Preserve all existing Digital Communication educational functionality.
+
+Pay special attention to:
+
+* Line Coding
+* ASK
+* FSK
+* PSK
+* DSSS
+* TDM
+* calculators
+* signal-related demonstrations
+* interactive visualizations
+
+If the current implementation uses JavaScript to dynamically generate a visualization, migrate that behavior into React without changing the intended output.
+
+---
+
+# 11. STATE MANAGEMENT
+
+Do NOT introduce Redux unless the application genuinely requires global state.
+
+For this project, prefer:
+
+```javascript
+useState
+useEffect
+useMemo
+useCallback
+```
+
+and local component state.
+
+Use Context only if there is a real shared-state requirement.
+
+Keep the architecture simple.
+
+---
+
+# 12. ERROR HANDLING
+
+Every interactive feature should handle:
+
+* empty input
+* invalid input
+* negative values where invalid
+* zero where invalid
+* non-numeric input
+* extremely large values
+* invalid combinations
+* division by zero
+* missing required fields
+
+Display user-friendly messages.
+
+Do not allow the application to crash.
+
+---
+
+# 13. ACCESSIBILITY
+
+Improve accessibility while maintaining the current design.
+
+Use:
+
+* semantic HTML
+* proper labels
+* accessible buttons
+* keyboard navigation
+* meaningful `alt` text
+* appropriate ARIA attributes where required
+* visible focus states
+* sufficient contrast
+
+Do not overuse ARIA when native HTML semantics are sufficient.
+
+---
+
+# 14. PERFORMANCE
+
+Keep the React implementation lightweight.
+
+Avoid:
+
+* unnecessary re-renders
+* unnecessary dependencies
+* huge UI libraries
+* unnecessary global state
+* duplicated logic
+
+Use lazy loading for large pages/components if it provides a real benefit.
+
+Do not optimize prematurely.
+
+---
+
+# 15. CSS
+
+You may reuse the existing CSS where practical, but clean it up for React.
+
+Organize styles logically.
+
+Prefer:
+
+```text
+global styles
+component styles
+page styles
+responsive styles
+```
+
+Remove:
+
+* duplicated CSS
+* unused CSS
+* obsolete selectors
+* inline styles where unnecessary
+
+But do not change the visual design merely for the sake of refactoring.
+
+---
+
+# 16. DATA / CONTENT
+
+Keep the existing educational content unless there is a clear technical reason to modify it.
+
+Do not invent unrelated content.
+
+If repeated content exists, consider storing it in structured JavaScript data:
+
+```javascript
+const features = [
+    {
+        title: "...",
+        description: "...",
+        icon: "..."
+    }
+];
+```
+
+Then render reusable React components.
+
+---
+
+# 17. NAVIGATION UX
+
+The navbar should:
+
+* highlight the current page/section
+* work on desktop
+* work on mobile
+* close mobile navigation after navigation
+* scroll correctly to sections when using anchors
+* not reload the entire page
+
+Ensure all links actually work.
+
+Do not leave dead links.
+
+---
+
+# 18. FOOTER
+
+Preserve the existing footer information and links.
+
+Ensure:
+
+* links work
+* layout is responsive
+* copyright information remains correct
+* developer/project information is preserved
+
+Do not remove existing credits.
+
+---
+
+# 19. CODE QUALITY
+
+Write production-quality React.
+
+Follow:
+
+* clear naming
+* single responsibility
+* reusable components
+* clean imports
+* no duplicated logic
+* no dead code
+* no unnecessary comments
+* no console errors
+* no hardcoded values where structured data is better
+* no unnecessary dependencies
+
+Avoid:
+
+```javascript
+document.getElementById(...)
+document.querySelector(...)
+innerHTML = ...
+onclick = ...
+```
+
+unless there is a genuine reason.
+
+React state and props should control the UI.
+
+---
+
+# 20. IMPORTANT VANILLA JS MIGRATION RULE
+
+Whenever you encounter code such as:
+
+```javascript
+document.getElementById("result").innerText = result;
+```
+
+convert it to React state:
+
+```javascript
+setResult(result);
+```
+
+Whenever you encounter:
+
+```javascript
+element.addEventListener(...)
+```
+
+convert it to React event handlers:
+
+```jsx
+onClick={handleClick}
+```
+
+Whenever you encounter:
+
+```javascript
+input.value
+```
+
+use controlled React state where appropriate:
+
+```jsx
+value={input}
+onChange={(e) => setInput(e.target.value)}
+```
+
+Whenever you encounter dynamically created DOM:
+
+```javascript
+document.createElement(...)
+```
+
+prefer React rendering.
+
+---
+
+# 21. DO NOT LOSE EXISTING FUNCTIONALITY
+
+Before declaring the migration complete, create a feature checklist from the original website.
+
+For every feature:
+
+```text
+Original feature
+        ↓
+React implementation
+        ↓
+Functional test
+        ↓
+Visual test
+```
+
+Every existing feature must have an equivalent React implementation.
+
+---
+
+# 22. TESTING
+
+After implementation, test:
+
+### Navigation
+
+* Home
+* Features
+* About
+* Every feature page
+* Every calculator
+* Every converter
+
+### Calculators
+
+Test:
+
+* normal values
+* boundary values
+* invalid values
+* empty values
+* decimal values
+
+### Responsive
+
+Test:
+
+* desktop
+* tablet
+* mobile
+
+### Browser
+
+Test at minimum:
+
+* Chrome
+* Firefox
+* Edge
+
+Fix all:
+
+* console errors
+* broken links
+* missing assets
+* layout overflow
+* React warnings
+* incorrect calculations
+
+---
+
+# 23. FINAL QUALITY STANDARD
+
+The final application should feel like it was built by an experienced frontend engineering team.
+
+It should be:
+
+**Visually faithful + React-native architecture + fully functional + responsive + maintainable.**
+
+Do not merely wrap the old HTML inside React.
+
+Actually migrate the application architecture.
+
+---
+
+# 24. FINAL DELIVERABLE
+
+At the end, provide:
+
+1. Complete React application.
+2. Clean component structure.
+3. All existing pages migrated.
+4. All existing JavaScript functionality migrated.
+5. All calculators working.
+6. All converters working.
+7. All interactive features working.
+8. Responsive UI.
+9. Existing visual design preserved.
+10. No broken navigation.
+11. No console errors.
+12. No unnecessary dependencies.
+13. Production-ready code.
+
+---
+
+# MOST IMPORTANT INSTRUCTION
+
+**Do not start by redesigning.**
+
+First understand the existing DigitalCommHub website and its current HTML/CSS/JavaScript implementation.
+
+Then migrate it carefully into React.
+
+The priority order is:
+
+```text
+1. Understand existing application
+2. Preserve functionality
+3. Preserve visual design
+4. Convert HTML → React components
+5. Convert DOM JavaScript → React state/events
+6. Separate calculation logic from UI
+7. Improve responsiveness
+8. Improve accessibility
+9. Clean architecture
+10. Test everything
+```
+
+Think and work like a **Senior Frontend Engineer with 10+ years of experience**, not like someone generating a generic React template.
+
+The final result should be a **professional React version of the existing DigitalCommHub website**, with the same functionality and identity, but with a much cleaner and scalable frontend architecture.
